@@ -1,4 +1,17 @@
+"""
+    File name: main.py
+    Author: Seung Won Joeng
+    Date created: 7/14/2021
+    Date last modified: 7/16/2021
+    Python Version: 3.7
+"""
+
+
 from selenium import webdriver
+
+"""
+Web driver Chrome test - YOU DON'T NEED TO RUN THIS SCRIPT
+"""
 
 class WebDriverChrome(object):
 

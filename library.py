@@ -1,20 +1,37 @@
+"""
+    File name: main.py
+    Author: Seung Won Joeng
+    Date created: 7/14/2021
+    Date last modified: 7/16/2021
+    Python Version: 3.7
+"""
+
+
 import time
-import pyperclip
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 import chromedriver_autoinstaller
 
 # Need to be updated
 CLASS_REFRESH = '_1MCHh'
 CLASS_LIST = '_31ySW'
-CLASS_RESERVED = 'lwEWu._1dEyY'
+CLASS_DEACTIVATED_RESERVED = 'lwEWu._1dEyY'
+CLASS_ACTIVATED_RESERVED = 'lwEWu'
 VACCINE_URL = "https://m.place.naver.com/rest/vaccine?vaccineFilter=used"
 
-def wait(rTime):
-    for i in range(rTime):
+
+def wait(aTime, msg=""):
+    for i in range(aTime):
         time.sleep(1)
-        print("Remain Time: ", str((rTime-i)))
+        if msg != "":
+            print("[", msg, "]", "Remaining Time : ", str((aTime-i)))
+        else:
+            print("Remaining Time : ", str((aTime - i)))
+
+
+def move_page(driver, url):
+    driver.get(url)
+
 
 def open_list(driver):
     print("Function: open_list")
@@ -22,22 +39,36 @@ def open_list(driver):
     element.click()
     time.sleep(1)
 
+
 def refresh(driver):
     print("Function: refresh")
     element = driver.find_element_by_class_name(CLASS_REFRESH)
     element.click()
     time.sleep(1.5)
 
+
 def check_avail_vaccines(driver):
-    print("Function: check Vaccines")
+    print("Function: check_avail_vaccines")
     try:
-        driver.find_element_by_class_name(CLASS_RESERVED).click()
+        driver.find_element_by_class_name(CLASS_DEACTIVATED_RESERVED)
+
     except NoSuchElementException:
-        time.sleep(1)
         try:
-            driver.find_element_by_class_name('lwEwu').click()
+            driver.find_element_by_class_name("_3zkaH")
         except NoSuchElementException:
-            print("UNKNOWN ERROR")
+            print("[ERROR] Function: check_avail_vaccines")
+            print("\tCannot find class _3zkaH")
+            return False
+
+        time.sleep(1)
+
+        try:
+            element = driver.find_element_by_class_name(CLASS_ACTIVATED_RESERVED)
+            element.click()
+
+        except NoSuchElementException:
+            print("[ERROR] Function: check_avail_vaccines") # Maybe network issue
+            print("\tCannot find class CLASS_ACTIVATED_RESERVED")
 
     time.sleep(1)
     if driver.current_url != VACCINE_URL:
@@ -45,9 +76,8 @@ def check_avail_vaccines(driver):
     else:
         return False
 
+"""
 
-
-chromedriver_autoinstaller.install()
 driver = webdriver.Chrome()
 driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com")
 wait(10)
@@ -88,3 +118,5 @@ driver.quit()
 # element.click()
 # wait(10)
 # driver.quit()
+
+"""
