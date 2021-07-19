@@ -21,14 +21,12 @@ class Bot:
         # You must be finish login action in aTime seconds.
 
         move_page(driver=self.driver, url=VACCINE_URL)  # Move to vaccine reservation page
-        wait(aTime=15)  # Wait 15 secs for network bandwidth
+        wait(aTime=20)  # Wait 15 secs for network bandwidth
 
         open_list(driver=self.driver)  # To see hospital list
 
         while True:
-            refresh(driver=self.driver)  # Find and click refresh button
-            res = check_avail_vaccines(driver=self.driver)
-            print(res)
+            res = refresh(driver=self.driver)  # Find and click refresh button
             if res:
                 break
 
