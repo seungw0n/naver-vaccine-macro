@@ -68,6 +68,7 @@ def clickOne(driver):
 def clickTwo(driver):
     print("Function: clickTwo")
     try:
+        print('\007')
         element = driver.find_element_by_xpath(XPATH_CONFIRMATION)
         element.click()
         return True
