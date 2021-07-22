@@ -41,7 +41,8 @@
         - move_page(driver, url) : url 주소로 이동
         - open_list(driver) : 병원 목록 오픈
         - refresh(driver) : 새로고침 (잔여백신용)
-        - clickOne(driver), clickTwo(driver) : 예약
+        - clickOne(driver), clickTwo(driver) : 예약 (x)
+        - click_reservation(driver), click_confirm(driver) : 예약
         
     
         
@@ -52,6 +53,7 @@
 ### Update
     - 15 Jul 2021: Chrome이 없으신 분들은 setup.py 의 install 함수를 실행시켜주세요.
     - 19 Jul 2021: Fixed Selenium's Element Is Not Clickable at Point error. But still not optimized yet.
+    - 22 Jul 2021: 사용자들이 고쳐쓰기 조금 더 편한 상태로 수정했습니다. (xpath 수정 완료)
     
 
 ### Common Errors - will be updated
